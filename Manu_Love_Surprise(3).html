@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>မနုအတွက် 💗</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:'Noto Sans Myanmar',sans-serif;background:linear-gradient(145deg,#ffe4ef,#fff0f5 48%,#ffd5e5);color:#813b59;display:flex;align-items:center;justify-content:center;padding:22px;overflow-x:hidden}
+.card{width:min(100%,480px);background:rgba(255,255,255,.86);border:2px solid #ffc2d8;border-radius:28px;padding:30px 23px;text-align:center;box-shadow:0 18px 55px #c65b8230;position:relative;z-index:2}
+.badge{font-size:42px;margin-bottom:4px}
+h1{font-size:clamp(27px,7vw,38px);margin:8px 0;color:#d64f83}
+.subtitle{font-size:15px;line-height:1.9;margin:8px 0 20px}
+.heart{font-size:34px;animation:pulse 1.3s infinite}
+@keyframes pulse{50%{transform:scale(1.2)}}
+button{font:600 15px 'Noto Sans Myanmar',sans-serif;border:0;border-radius:999px;padding:12px 22px;margin:7px;cursor:pointer;box-shadow:0 5px 12px #d64f8330}
+.yes{background:#e95d91;color:white}.no{background:#ffe0eb;color:#a74369}
+#letter{display:none;text-align:left;background:#fff4f8;border-radius:20px;padding:19px 17px;margin-top:20px;line-height:2.05;font-size:14px;white-space:pre-line;border:1px solid #ffd0e0}
+#reply{min-height:30px;color:#d64f83;font-weight:700;margin-top:12px}
+.small{font-size:12px;color:#a66b82;margin-top:20px}
+.float{position:fixed;bottom:-35px;z-index:1;animation:rise linear infinite;opacity:.65;pointer-events:none}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="badge">🧸🌷</div>
+  <div class="heart">💗</div>
+  <h1>မနုရေ…</h1>
+  <p class="subtitle">မင်းအတွက် ကိုယ်ဖန်တီးထားတဲ့<br>အမှတ်တရလက်ဆောင်လေးပါ။</p>
+  <p>ကိုယ့်ကို ချစ်လားဟင်။ 🥺</p>
+  <button class="yes" onclick="yesClick()">ချစ်တယ် ❤️</button>
+  <button class="no" onclick="noClick()">မသိဘူး 🙈</button>
+  <div id="reply"></div>
+  <div id="letter">မနုရေ… 💌
+
+ကိုယ်တို့နှစ်ယောက် ဆုံတွေ့ခဲ့ရတာဟာ
+ကံကြမ္မာရဲ့ လက်ဆောင်လေးတစ်ခုလို့ ကိုယ်ထင်တယ်။
+
+မင်းပျော်နေတဲ့အချိန်မှာလည်း အတူရှိချင်တယ်။
+မင်းစိတ်ညစ်နေတဲ့အချိန်မှာလည်း အနားမှာရှိပေးချင်တယ်။
+
+အရာအားလုံး ပြည့်စုံနေဖို့ မလိုပါဘူး။
+မင်းသာ ကိုယ့်ဘေးမှာရှိနေပေးရင် လုံလောက်ပါတယ်။
+
+ကိုယ်တို့နှစ်ယောက် အချိန်တွေဘယ်လောက်ကြာကြာ
+လက်တွဲမဖြုတ်ဘဲ အတူတူရှေ့ဆက်သွားချင်တယ်။
+
+ဒီနေ့လိုပဲ နောင်လာမယ့်နေ့ရက်တိုင်းမှာလည်း
+မနုနဲ့အတူ ရှိနေချင်တယ်။
+
+ကိုယ် မနုကို ချစ်တယ်။ ❤️</div>
+  <button class="no" onclick="musicToggle()" id="musicBtn">🎵 သီချင်းသံဖွင့်ရန်</button>
+  <div class="small">မင်းအတွက်ပဲ… အမြဲတမ်း အမှတ်တရလေး 💕</div>
+</div>
+<script>
+function yesClick(){
+ document.getElementById('reply').textContent='ဟေး… ဒီအဖြေလေးကို ကိုယ်အရမ်းဝမ်းသာတယ်။ 💖';
+ document.getElementById('letter').style.display='block';
+}
+function noClick(){
+ document.getElementById('reply').textContent='ရပါတယ် မနုရေ။ ကိုယ့်ကို အေးအေးဆေးဆေး စဉ်းစားပေးနော်။ 🌸';
+ document.getElementById('letter').style.display='block';
+}
+let ctx, timer, playing=false, note=0;
+function musicToggle(){
+ const btn=document.getElementById('musicBtn');
+ if(playing){clearInterval(timer);playing=false;btn.textContent='🎵 သီချင်းသံဖွင့်ရန်';return;}
+ const AC=window.AudioContext||window.webkitAudioContext;
+ if(!AC){btn.textContent='ဒီဖုန်းမှာ အသံမဖွင့်နိုင်ပါ';return;}
+ ctx=ctx||new AC(); ctx.resume(); playing=true; btn.textContent='🔇 သီချင်းသံပိတ်ရန်';
+ const notes=[523.25,659.25,783.99,659.25,587.33,698.46,783.99,698.46];
+ timer=setInterval(()=>{let o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=notes[note++%notes.length];g.gain.setValueAtTime(.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.07,ctx.currentTime+.03);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.42);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.45)},480);
+}
+for(let i=0;i<18;i++){let s=document.createElement('span');s.className='float';s.textContent=['💗','💕','🌸','✨'][i%4];s.style.left=Math.random()*100+'vw';s.style.animationDuration=(8+Math.random()*9)+'s';s.style.animationDelay=(-Math.random()*15)+'s';s.style.fontSize=(16+Math.random()*20)+'px';document.body.appendChild(s)}
+</script>
+</body>
+</html>
